@@ -186,15 +186,12 @@ def zero_shot_inference_with_dataset(model_name, test_dataset, text_column, task
 def generate_report_and_visualizations(labels, predictions, task_name, text_type):
     report = classification_report(labels, predictions, target_names=["0", "1"])
     print(f"Classification Report for {task_name} using {text_type}:\n", report)
-    if task_name == "Task 01 (Political Ideology)":
-        x="left"
-        y="right"
-    elif task_name == "Task 02 (Political Orientation)":
-        x="governing party"
-        y="opposition party"
     cm = confusion_matrix(labels, predictions)
     plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=[x, y], yticklabels=[x, y])
+    if task_name == "Task 01 (Political Ideology)":
+      sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["left", "right"], yticklabels=["left", "right"])
+    else:
+      sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["governing party", "opposition party"], yticklabels=["governing party", "opposition party"])
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title(f'Confusion Matrix for {task_name} using {text_type}')
