@@ -261,7 +261,7 @@ def main(train_folder, country, augmentation_ratio=1.5):
 
     orientation_train, orientation_test = split_data(orientation_data)
     power_train, power_test = split_data(power_data)
-    
+
     #fine tuning model for Task 01 using text_en
     print("\nTask 1: Political Ideology Identification using text_en")
     orientation_train_dataset = prepare_dataset(orientation_train, tokenizer, text_column='text_en')
